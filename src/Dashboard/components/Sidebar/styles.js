@@ -31,8 +31,7 @@ export const SSidebarButton = styled.button`
 `;
 
 export const SLogo = styled.div`
-    width: 70px;
-
+    width: 35px;
     img {
         max-width: 100%;
         height: auto;

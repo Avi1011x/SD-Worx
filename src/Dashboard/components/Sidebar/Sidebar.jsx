@@ -42,7 +42,7 @@ const Sidebar = () => {
                 </SSidebarButton>
             </>
             <SLogo>
-                <img src="/images/pwc-logo.png" alt="" />
+                <img src="/images/04.png" alt="" />
 
             </SLogo>
 

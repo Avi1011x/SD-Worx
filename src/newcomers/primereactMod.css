@@ -9,7 +9,7 @@
     justify-content: end;
 }
 .p-progressbar-value{
-    background-color: #f85500;
+    background-color: #E4003A;
 }
 .p-fileupload-buttonbar{
     background: none;
@@ -31,16 +31,26 @@
     display: none;
 }
 .p-button{
-    background-color: #f85500;
+    background-color: #E4003A;
     color: white;
     border: none;
 }
 .p-slider-range{
-    background-color: #f85500;
+    background-color: #E4003A;
 }
 .p-slider-handle{
-    border: 2px solid #f85500;
+    border: 2px solid #E4003A;
 }
 .p-progressbar-label{
     display: none;
+}
+
+.p-confirm-dialog-reject{
+    background-color: #d9d5d2;
+    color: white;
+    border: none;
+}
+
+.p-confirm-dialog-accept {
+    background-color: #8C0D60;
 }
