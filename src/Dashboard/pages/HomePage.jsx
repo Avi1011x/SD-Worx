@@ -3,7 +3,7 @@ import React, { useState, useRef } from 'react';
 import { ConfirmDialog, confirmDialog } from 'primereact/confirmdialog';
 import { Toast } from 'primereact/toast';
 import { Button } from 'primereact/button';
-import "primereact/resources/themes/lara-light-indigo/theme.css";
+import "primereact/resources/themes/lara-light-purple/theme.css";
 import './Style/App.css'
 import TaskList from './TaskList';
 import { Knob } from 'primereact/knob';
@@ -115,11 +115,11 @@ const HomePage = () => {
     const toast = useRef(null);
 
     const accept = () => {
-        toast.current.show({ severity: 'info', summary: 'Confirmed', detail: 'You have accepted', life: 3000 });
+        toast.current.show({ severity: 'info', summary: 'Confirmed', detail: 'You have accepted', life: 300000 });
     }
 
     const reject = () => {
-        toast.current.show({ severity: 'warn', summary: 'Rejected', detail: 'You have rejected', life: 3000 });
+        toast.current.show({ severity: 'warn', summary: 'Rejected', detail: 'You have rejected', life: 300000 });
     }
 
     return (

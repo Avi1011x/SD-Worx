@@ -17,7 +17,7 @@ function AcademyHeader({ isOpen }) {
     <>
       <div className={styles.header}>
         <div className={styles.logos}>
-          <img src="/images/pwc-logo.png" height={"27px"} alt="" />
+          <img src="/images/SD_logo_baseline_RGB.png" height={"27px"} alt="" />
           <h2>Academy + </h2>
           <img src="/images/youtube logo.png" height={"15px"} alt="" />
         </div>
