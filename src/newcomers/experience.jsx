@@ -1,84 +1,25 @@
 import styles from "./newcomers.module.css";
 import prodStyles from "./proceed.module.css";
-import { Outlet, Link } from "react-router-dom";
+import { Outlet, Link, useNavigate } from "react-router-dom";
 import { ProgressBar } from "primereact/progressbar";
-import { Dropdown } from "primereact/dropdown";
 import { useState } from "react";
 import "./primereactMod.css";
 
-function Experience() {
-  const [workCode, setWorkCode] = useState([]);
-  const [count, setCount] = useState(2);
 
-  const addWorkExp = () => {
-    setCount((prevCount) => prevCount + 1);
-    const newWorkExp = (
-      <div className="item" key={count}>
-        <div className={prodStyles.eduHead}>
-          <h4>Work Experinece {count}</h4>
-        </div>
-        <div className={prodStyles.fields}>
-          <div>
-            <span style={{ marginLeft: "10px" }}>
-              Job Title <span style={{ color: "#f85500" }}>*</span>
-            </span>
-            <label htmlFor="jobTitle">
-              <input
-                type="text"
-                name="jobTitle"
-                id="jobTitle"
-                placeholder="Enter your job title"
-                required
-              />
-            </label>
-          </div>
-          <div>
-            <span style={{ marginLeft: "10px" }}>
-              Company <span style={{ color: "#f85500" }}>*</span>
-            </span>
-            <label htmlFor="company">
-              <input
-                type="text"
-                name="company"
-                id="company"
-                placeholder="Enter your company name"
-                required
-              />
-            </label>
-          </div>
-          <div>
-            <span style={{ marginLeft: "10px" }}>
-              Experience <span style={{ color: "#f85500" }}>*</span>
-            </span>
-            <label htmlFor="exp">
-              <input
-                type="number"
-                name="exp"
-                id="exp"
-                placeholder="Enter experience in years"
-                required
-              />
-            </label>
-          </div>
-        </div>
-        <div>
-          <label htmlFor="enroll">
-            <input type="checkbox" name="enroll" id="enroll" />
-            <span>I currently work here</span>
-          </label>
-        </div>
-      </div>
-    );
-    setWorkCode([...workCode, newWorkExp]);
-  };
+function Experience(props) {
 
-  const deleteWorkExperience = () => {
-    const workExpList = document.getElementsByClassName("item");
-    if (workExpList.length == 0) {
-      return;
+  const navigate = useNavigate();
+
+  const getExperience =(e)=>{
+    e.preventDefault();
+    const input = document.getElementsByTagName("input");
+    let experienceList = "";
+    for (let index = 0; index < input.length -1; index++) {
+      experienceList+= input[index].value + " ";
     }
-    setCount(count - 1);
-    workExpList[workExpList.length - 1].remove();
+    props.experinces("These are my experience: "+experienceList+"\n");
+    navigate('/Career_Goals'); // Use the history object to navigate
+
   };
 
   return (
@@ -94,10 +35,10 @@ function Experience() {
           <ProgressBar style={{ height: "15px" }} value={80}></ProgressBar>
         </div>
 
-        <form id="experience" className={prodStyles.eduList}>
+        <form id="experience" className={prodStyles.eduList} onSubmit={getExperience}>
           <div>
             <div className={prodStyles.eduHead}>
-              <h4>Work Experinece 1</h4>
+              <h4>Work Experinece</h4>
             </div>
             <div className={prodStyles.fields}>
               <div>
@@ -150,7 +91,6 @@ function Experience() {
               </label>
             </div>
           </div>
-          {workCode}
         </form>
 
         <div className={prodStyles.BackNextBtn}>
@@ -159,13 +99,6 @@ function Experience() {
               Go Back
             </Link>
           </button>
-          <button
-            onClick={deleteWorkExperience}
-            style={{ color: "#F85500", border: "2px solid #F85500" }}
-          >
-            Delete Work EXP
-          </button>
-          <button onClick={addWorkExp}>Add Another</button>
           <button
             form="experience"
             type="submit"

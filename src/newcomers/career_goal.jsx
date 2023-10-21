@@ -1,13 +1,24 @@
 import styles from "./newcomers.module.css";
 import prodStyles from "./proceed.module.css";
-import { Outlet, Link } from "react-router-dom";
+import { Outlet, Link, useNavigate } from "react-router-dom";
 import { ProgressBar } from "primereact/progressbar";
 import { Slider } from "primereact/slider";
 import { useState } from "react";
 import "./primereactMod.css";
 
-function CareerGoal() {
-  const [range, setRange] = useState([40000, 60000]);
+function CareerGoal(props) {
+
+const navigate = useNavigate();
+
+  const getFields = (e)=>{
+    e.preventDefault();
+    const goal = document.getElementById("desiredTitle");
+    const aspiration = document.getElementById("aspiration");
+
+    const data ="My desired goal is "+  goal + " and my aspiration :" +aspiration + "\n";
+    props.goals(data);
+    navigate('/DashBoard'); 
+  };
 
   return (
     <>
@@ -22,9 +33,9 @@ function CareerGoal() {
           <ProgressBar style={{ height: "15px" }} value={80}></ProgressBar>
         </div>
 
-        <form id="goals" className={prodStyles.eduList}>
-          <div className={prodStyles.fields}>
-            <div>
+        <form id="goals" className={prodStyles.eduList} onSubmit={getFields}>
+          <div className={prodStyles.fields} >
+            <div style={{flex:"100%"}}>
               <span style={{ marginLeft: "10px" }}>
                 Desired job title / Career path{" "}
                 <span style={{ color: "#f85500" }}>*</span>
@@ -40,49 +51,11 @@ function CareerGoal() {
               </label>
             </div>
             <div>
-              <span style={{ marginLeft: "10px" }}>
-                Time to be allocated <span style={{ color: "#f85500" }}>*</span>
-              </span>
-              <label htmlFor="timeAllocated">
-                <input
-                  type="text"
-                  name="timeAllocated"
-                  id="timeAllocated"
-                  placeholder="Enter time in months"
-                  required
-                />
-              </label>
-            </div>
-            <div style={{ margin: "5px 0 15px 0", flex: "100%" }}>
-              <span style={{ width: "100%" }}>Expected salary range</span>
-              <br />
-              <input
-                name="expectSalary"
-                id="expectSalary"
-                style={{
-                  color: "gray",
-                  fontSize: "14px",
-                  marginBottom: "10px",
-                  backgroundColor: "transparent",
-                }}
-                disabled
-                value={"Rs " + range[0] + " - Rs " + range[1]}
-              />
-              <Slider
-                max={200000}
-                value={range}
-                onChange={(e) => setRange(e.value)}
-                style={{ width: "100%" }}
-                range
-                step={1000}
-              />
-            </div>
-            <div>
               <span>Long-term career aspiration</span>
-              <label htmlFor="salaryRange">
+              <label htmlFor="aspiration">
                 <textarea
-                  name="salaryRange"
-                  id="salaryRange"
+                  name="aspiration"
+                  id="aspiration"
                   rows={3}
                   style={{ width: "100%" }}
                 ></textarea>
