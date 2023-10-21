@@ -32,6 +32,7 @@ function formatJSONString(jsonString) {
 
 
 const promptString = `
+Make sure you output the result based to the input DESIRED JOB
 keep progress 0
 based on the about information above i want use to accurately output a a learning roadmap in phases by order for the user he can do in json format. You should only output the JSON, nothing more. You shoud use your knowledge and filling the json accurately based on the information provided. Also note that the title in the JSON will be used for searching courses on youtube so that the user get revelant videos, so much sure to provide a meanful title. The learning roadmap should only contain learning phrases and not anything outside that.
 An example is shown:
@@ -85,8 +86,14 @@ const HomePage = () => {
 
     const palm = new PalmAI();
 
-    const runAPICall =async () =>{
-        const response = await palm.getResponse(promptString);
+    const runAPICall =async (userInput) =>{
+
+        
+        let content;
+        content = userInput + promptString;
+
+
+        const response = await palm.getResponse(content);
 
         const jsonData = JSON.parse(formatJSONString(response));
         setApiResponse(jsonData);
