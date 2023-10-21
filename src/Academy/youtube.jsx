@@ -3,8 +3,8 @@ import axios from "axios";
 class Youtube {
   constructor() {
     this.headers = {
-        'X-RapidAPI-Key': 'fc1cb2e3eamsh437dbbcfd02637cp156484jsn623cefc17583',
-        'X-RapidAPI-Host': 'yt-api.p.rapidapi.com'
+      'X-RapidAPI-Key': 'ebdec5e4c0mshbd5e41dc95fbc23p1009b6jsn394ab1f40d38',
+    'X-RapidAPI-Host': 'yt-api.p.rapidapi.com'
     };
   }
 

@@ -3,7 +3,7 @@ import { HashRouter, Route, Routes } from 'react-router-dom';
 import "primereact/resources/themes/lara-light-indigo/theme.css";
 import 'primeicons/primeicons.css';
 import Dash from "./Dashboard/Dashboard";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Education from "./newcomers/education";
 import Experience from "./newcomers/experience";
 import CareerGoal from "./newcomers/career_goal";
@@ -13,6 +13,10 @@ import Academy from "./Academy/Academy";
 function App() {
   const[data, setData] = useState("");
 
+
+  useEffect(()=>{
+    console.log(data)
+  },[data]);
   return (
     <>
       <HashRouter>
@@ -24,7 +28,7 @@ function App() {
               <Route exact path="/Career_Goals" element={<CareerGoal/>} />
               <Route exact path="/LinkedinUrl" element={<LinkedInURL/>} />
           </Route>
-          <Route path="/Dashboard" element={<Dash />} />
+          <Route path="/Dashboard" element={<Dash data={data}/>} />
             <Route path="/statistics" element={<Academy/>} />
             <Route path="/customers" element={<h1>Customers Page</h1>} />
             <Route path="/diagrams" element={<h1>Diagrams Page</h1>} />

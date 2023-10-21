@@ -17,10 +17,6 @@ function NewComers(props) {
   const[experienceList, setExperienceList] = useState("");
   const[goals, setGoals] = useState("");
 
-  useEffect(()=>{
-    props.data(educationList + " " + experienceList+ " "+ goals);
-  },[goals]);
-
   return (
     <>
       <div className={styles.main}>
@@ -31,7 +27,7 @@ function NewComers(props) {
               <Route path="/Upload_Resume" element={<UploadResume/>} />
               <Route path="/Education" element={<Education educations={setEducationList}/>} />
               <Route exact path="/Experience" element={<Experience experinces={setExperienceList}/>} />
-              <Route exact path="/Career_Goals" element={<CareerGoal goals={setGoals}/>} />
+              <Route exact path="/Career_Goals" element={<CareerGoal goals={setGoals} data={props.data} content={educationList + " "+ experienceList}/>} />
               <Route exact path="/LinkedinUrl" element={<LinkedInURL/>} />
             </Routes>
         </div>

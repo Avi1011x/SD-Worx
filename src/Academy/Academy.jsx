@@ -72,10 +72,12 @@ function Academy(props) {
 
   // Define a function to search for videos using the Youtube class
   const searchPlayList = async () => {
+    const json = localStorage.getItem("playlist");
+    const jsonData = JSON.parse(json);
     try {
       const playListID = await Promise.all(
-        topics.map(async (topic) => {
-          const data = await youtube.searchPlayList(topic);
+        jsonData.learningroadmap.map(async (topic) => {
+          const data = await youtube.searchPlayList(topic.course);
           return data.data[0].playlistId;
         })
       );

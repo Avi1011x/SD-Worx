@@ -12,11 +12,14 @@ const navigate = useNavigate();
 
   const getFields = (e)=>{
     e.preventDefault();
-    const goal = document.getElementById("desiredTitle");
-    const aspiration = document.getElementById("aspiration");
+    const goal = document.getElementById("desiredTitle").value;
+    const aspiration = document.getElementById("aspiration").value;
 
     const data ="My desired goal is "+  goal + " and my aspiration :" +aspiration + "\n";
     props.goals(data);
+    props.data(props.content + " " +data);
+    localStorage.setItem("userData",`${props.content + " " +data}`);
+
     navigate('/DashBoard'); 
   };
 
