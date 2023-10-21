@@ -9,7 +9,7 @@ function App() {
   return (
     <>
       <HashRouter>
-        <Dash />
+        <NewComers />
       </HashRouter>
     </>
   );
