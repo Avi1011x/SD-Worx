@@ -11,14 +11,13 @@ import { Dialog } from 'primereact/dialog';
 
 
 import { InputText } from 'primereact/inputtext';
+import PalmAI from '../../Api/palm';
 
 const API_URL = 'http://www.omdbapi.com/?apikey=27943250';
 
 function formatJSONString(jsonString) {
-
     // Remove leading and trailing spaces if present
     jsonString = jsonString.trim();
-
     // If the jsonString doesn't start with '{', add it
     if (jsonString.startsWith('```json')) {
         jsonString = jsonString.replace(/^```json/, '').replace(/```$/, '');
@@ -79,40 +78,20 @@ const HomePage = () => {
     const [apiResponse, setApiResponse] = useState([]);
     const [value, setValue] = useState(60);
 
-    const runAPICall = async (userInput) => {
-        const response = await fetch(`${API_URL}&s=${userInput}`);
-        const data = await response.json();
-
-        setMovies(data.Search);
-
-        let content;
-        content = userInput + promptString;
-
-        fetch('http://localhost:9000/testAPI/send-message', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ content }),
-        })
-            .then((res) => res.text())
-            .then(() => {
-                fetch('http://localhost:9000/testAPI')
-                    .then((res) => res.text())
-                    .then((res) => {
-                        console.log(formatJSONString(res));
-                        setApiResponse(JSON.parse(formatJSONString(res)));
-                    });
-            }
-            )
-            .catch((error) => {
-                console.error(error);
-            });
-    };
     const [visible, setVisible] = useState(false);
     const [visible2, setVisible2] = useState(false);
 
     const toast = useRef(null);
+
+    const palm = new PalmAI();
+
+    const runAPICall =async () =>{
+        const response = await palm.getResponse(promptString);
+
+        const jsonData = JSON.parse(formatJSONString(response));
+        setApiResponse(jsonData);
+        console.log(jsonData);
+    };
 
     const accept = () => {
         toast.current.show({ severity: 'info', summary: 'Confirmed', detail: 'You have accepted', life: 300000 });
