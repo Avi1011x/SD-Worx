@@ -4,6 +4,35 @@ import { ProgressBar } from "primereact/progressbar";
 import "./primereactMod.css";
 
 function LinkedInURL() {
+  const [movies, setMovies] = useState([]);
+  const [search, setSearch] = useState('');
+
+
+  const runAPICall = async (userInput) => {
+      const response = await fetch(`${API_URL}&s=${userInput}`);
+      const data = await response.json();
+
+      setMovies(data.Search);
+      const options = {
+          method: 'GET',
+          url: 'https://fresh-linkedin-profile-data.p.rapidapi.com/get-linkedin-profile',
+          params: {
+              linkedin_url: userInput
+          },
+          headers: {
+              'X-RapidAPI-Key': '8ab75dc3a8msha344a040be8951fp1dec19jsn10dadc3792131',
+              'X-RapidAPI-Host': 'fresh-linkedin-profile-data.p.rapidapi.com'
+          }
+      };
+
+      try {
+          const response = await axios.request(options);
+          setMovies(response.data);
+      } catch (error) {
+          console.error(error);
+      }
+    
+  };
   return (
     <>
       <div className={prodStyles.proceed}>
@@ -30,6 +59,8 @@ function LinkedInURL() {
                 id="linkedinURL"
                 placeholder="Enter your LinkedIn Profile URL"
                 required
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
               />
             </label>
           </div>
@@ -45,6 +76,7 @@ function LinkedInURL() {
           <button
             form="others"
             type="submit"
+            onClick={() => runAPICall(search)}
             style={{
               color: "white",
               border: "none",
